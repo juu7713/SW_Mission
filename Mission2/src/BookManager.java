@@ -80,8 +80,8 @@ public class BookManager {
 			else if (ID < this.Library.get(mid).id) { //찾는 ID가 중간값보다 작다
 				last=mid-1;           // 앞 부분 재탐색
 			}
-			else if(ID >this.Library.get(mid).id ) { //찾는 ID가 중간값보다 크다
-				first=mid-1;          // 뒷 부분 재탐색
+			else if(ID > this.Library.get(mid).id ) { //찾는 ID가 중간값보다 크다
+				first=mid+1;          // 뒷 부분 재탐색
 			}
 		}
 		System.out.println("해당 ID(" + ID + ")의 도서를 찾을 수 없습니다."); //찾는 ID가 없을 경우 출력
