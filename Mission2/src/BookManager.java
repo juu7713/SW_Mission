@@ -62,6 +62,31 @@ public class BookManager {
 		this.Library.add(book);		
 		Collections.sort(this.Library);		// Library 정렬
 	}
+	
+	public void search_bs(int ID) {
+		int last=this.Library.size()-1; //Library의 마지막 ID
+		int first=0;                    //Library의 첫번째 ID
+		
+		while(first<=last) {
+			
+			mid=(first+last)/2;   //중간값 계산
+			
+			if(ID == this.Library.get(mid).id) { //찾는 ID가 중간값과 동일
+				System.out.println("검색결과:");
+				this.Library.get(mid).printBookInfo(); //검색결과 출력
+				return;
+			}
+			
+			else if (ID < this.Library.get(mid).id) { //찾는 ID가 중간값보다 작다
+				last=mid-1;           // 앞 부분 재탐색
+			}
+			else if(ID >this.Library.get(mid).id ) { //찾는 ID가 중간값보다 크다
+				first=mid-1;          // 뒷 부분 재탐색
+			}
+		}
+		System.out.println("해당 ID(" + ID + ")가 존재하지 않습니다."); //찾는 ID가 없을 경우 출력
+		return;
+	}
 	/*
 	Book[] library = new Book[10];	// Book 객체 배열
 
