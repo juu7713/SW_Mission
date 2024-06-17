@@ -32,6 +32,7 @@ public class BookManager {
 	public void searchBook(int ID) {
 		for (int i = 0; i < this.Library.size(); i++) {	// Library에 같은 id의 Book이 있는지 확인
 			if (this.Library.get(i).id == ID) {	// Library에 있으면 검색결과 출력
+
 				System.out.println("검색결과:");
 				this.Library.get(i).printBookInfo();
 				return;
@@ -55,6 +56,32 @@ public class BookManager {
 		Collections.sort(this.Library);		// Library 정렬
 		book.printBookInfo();
 		System.out.println("도서가 추가되었습니다.");
+	}
+	
+
+	public void search_bs(int ID) {
+		int last=this.Library.size()-1; //Library의 마지막 ID
+		int first=0;                    //Library의 첫번째 ID
+		
+		while(first<=last) {
+			
+			int mid=(first+last)/2;   //중간값 계산
+			
+			if(ID == this.Library.get(mid).id) { //찾는 ID가 중간값과 동일
+				System.out.println("검색결과:");
+				this.Library.get(mid).printBookInfo(); //검색결과 출력
+				return;
+			}
+			
+			else if (ID < this.Library.get(mid).id) { //찾는 ID가 중간값보다 작다
+				last=mid-1;           // 앞 부분 재탐색
+			}
+			else if(ID > this.Library.get(mid).id ) { //찾는 ID가 중간값보다 크다
+				first=mid+1;          // 뒷 부분 재탐색
+			}
+		}
+		System.out.println("해당 ID(" + ID + ")의 도서를 찾을 수 없습니다."); //찾는 ID가 없을 경우 출력
+		return;
 	}
 	
 	public void deleteBook(int ID) {
