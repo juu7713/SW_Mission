@@ -19,15 +19,7 @@ public class BookManager {
 		
 		@Override
 		public int compareTo(Book book) {	// Book 객체의 id 크기 비교
-			if (this.id < book.id) {
-				return -1;
-			}
-			else if (this.id == book.id) {
-				return 0;
-			}
-			else {
-				return 1;
-			}
+			return Integer.compare(this.id, book.id);
 		}
 		
 		public void printBookInfo() {	// id로 library의 Book 정보 출력
@@ -35,24 +27,25 @@ public class BookManager {
 		}
 	}
 
-	ArrayList<Book> Library = new ArrayList<Book>();
+	ArrayList<Book> Library = new ArrayList<Book>();	// Book 객체를 담는 배열
 	
 	public void searchBook(int ID) {
-		for (int i = 0; i < this.Library.size(); i++) {
-			if (this.Library.get(i).id == ID) {
+		for (int i = 0; i < this.Library.size(); i++) {	// Library에 같은 id의 Book이 있는지 확인
+			if (this.Library.get(i).id == ID) {	// Library에 있으면 검색결과 출력
+
 				System.out.println("검색결과:");
-				this.Library.get(ID).printBookInfo();
+				this.Library.get(i).printBookInfo();
 				return;
 			}	
 		}
-		
-		
+		// Library에 없으면 안내
+		System.out.println("검색된 도서가 없습니다.");	
 	}
 	
 	public void addBook(int ID, String Title, String Author, int Year) {
 		Book book = new Book(ID, Title, Author, Year);
 		// Library에 같은 id의 Book이 있는지 확인
-		for (int i = 0; i <= this.Library.size(); i++) {
+		for (int i = 0; i < this.Library.size(); i++) {
 			if (this.Library.get(i).compareTo(book) == 0) {	// 같은 id 있으면 안내
 				System.out.println("해당 ID(" + ID + ")는 이미 존재합니다.");
 				return;
@@ -61,8 +54,11 @@ public class BookManager {
 		// Library에 같은 id 없으면 book 추가
 		this.Library.add(book);		
 		Collections.sort(this.Library);		// Library 정렬
+		book.printBookInfo();
+		System.out.println("도서가 추가되었습니다.");
 	}
 	
+
 	public void search_bs(int ID) {
 		int last=this.Library.size()-1; //Library의 마지막 ID
 		int first=0;                    //Library의 첫번째 ID
