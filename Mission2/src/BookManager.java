@@ -38,7 +38,7 @@ public class BookManager {
 	ArrayList<Book> Library = new ArrayList<Book>();
 	
 	public void searchBook(int ID) {
-		for (int i = 0; i <= this.Library.size(); i++) {
+		for (int i = 0; i < this.Library.size(); i++) {
 			if (this.Library.get(i).id == ID) {
 				System.out.println("검색결과:");
 				this.Library.get(ID).printBookInfo();
@@ -69,7 +69,7 @@ public class BookManager {
 		
 		while(first<=last) {
 			
-			mid=(first+last)/2;   //중간값 계산
+			int mid=(first+last)/2;   //중간값 계산
 			
 			if(ID == this.Library.get(mid).id) { //찾는 ID가 중간값과 동일
 				System.out.println("검색결과:");
@@ -84,9 +84,24 @@ public class BookManager {
 				first=mid-1;          // 뒷 부분 재탐색
 			}
 		}
-		System.out.println("해당 ID(" + ID + ")가 존재하지 않습니다."); //찾는 ID가 없을 경우 출력
+		System.out.println("해당 ID(" + ID + ")의 도서를 찾을 수 없습니다."); //찾는 ID가 없을 경우 출력
 		return;
 	}
+	
+	public void deleteBook(int ID) {
+		for (int i = 0; i < this.Library.size(); i++) {	// Library에 같은 id의 Book이 있는지 확인
+			if (this.Library.get(i).id == ID) {	// Library에 있으면 삭제
+				this.Library.get(i).printBookInfo();
+				System.out.println("도서를 삭제하였습니다.");
+				this.Library.remove(i);		// Library에서 삭제 
+				Collections.sort(this.Library);		// Library 정렬
+				return;
+			}		
+		}	
+		// Library에서 못 찾으면 안내
+		System.out.println("해당 ID(" + ID + ")의 도서를 찾을 수 없습니다.");
+	}
+	
 	/*
 	Book[] library = new Book[10];	// Book 객체 배열
 
