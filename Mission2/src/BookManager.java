@@ -53,6 +53,8 @@ public class BookManager {
 		// Library에 같은 id 없으면 book 추가
 		this.Library.add(book);		
 		Collections.sort(this.Library);		// Library 정렬
+		book.printBookInfo();
+		System.out.println("도서가 추가되었습니다.");
 	}
 	
 	public void deleteBook(int ID) {
